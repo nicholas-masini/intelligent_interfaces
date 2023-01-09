@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "intelligent_interfaces",
+    "slug": "intelligent_interfaces",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "intelligent_interfaces"
+}
