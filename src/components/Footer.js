@@ -14,7 +14,7 @@ const Footer = ({navigation}) => {
               name='book'
               type='entypo'
               style={{marginBottom: 6}}
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => navigation.navigate('Recommended')}
             />
             <Text>Recommendations</Text>
           </View>

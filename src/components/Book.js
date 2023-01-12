@@ -1,23 +1,24 @@
 import React from "react";
 
-import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image } from "react-native";
+import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 
-const image = require('../../assets/book.jpg') 
+const Book = ({navigation, isCrime, title, author, cover, genre}) => {
 
-const Book = ({navigation, isCrime}) => {
+    // const image = require(cover) 
+
     return (
-        <View style={styles.book}>
+        <TouchableOpacity style={styles.book} onPress={() => navigation.navigate('Book', { title: title, author: author, cover: cover, genre: genre})}>
             <View style={styles.book_cover}>
                 <Image 
-                    source={image}
+                    source={cover}
                     style={styles.image}
                 />
             </View>
             <View style={styles.text_container}>
-                <Text style={[styles.book_title, (isCrime ? styles.white : null)]}>The Dark Side of Winter</Text>
-                <Text style={[styles.book_author, (isCrime ? styles.white : null)]}>Morgan Maxwell</Text>
+                <Text style={[styles.book_title, (isCrime ? styles.white : null)]}>{title}</Text>
+                <Text style={[styles.book_author, (isCrime ? styles.white : null)]}>{author}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

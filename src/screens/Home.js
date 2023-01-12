@@ -8,7 +8,10 @@ import Book from "../components/Book";
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image } from "react-native";
 import { Icon } from "@rneui/themed";
 
-const image = require('../../assets/book.jpg') 
+// Importing images
+import darkSide from '../../assets/book.jpg'
+
+// const image = require('../../assets/book.jpg') 
 
 const Home = ({navigation}) => {
     
@@ -50,13 +53,13 @@ const Home = ({navigation}) => {
                         </Text>
                         <View style={{height: 290, marginBottom: 30}}>
                             <ScrollView style={styles.books_container} horizontal>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
                             </ScrollView>
                         </View>
                         <Text style={styles.headers}>
@@ -64,13 +67,13 @@ const Home = ({navigation}) => {
                         </Text>
                         <View style={{height: 290, marginBottom: 30}}>
                             <ScrollView style={styles.books_container} horizontal>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
-                                <Book/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
+                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'}/>
                             </ScrollView>
                         </View>
                     </ScrollView>

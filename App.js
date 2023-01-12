@@ -7,6 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/Home.js'
 import HomeCrime from './src/screens/HomeCrime.js';
 import Login from './src/screens/Login.js'
+import Recommended from './src/screens/Recommended.js';
+import BookPage from './src/screens/BookPage.js';
+import RatingScreen from './src/screens/RatingPage.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +48,21 @@ export default function App() {
           <Stack.Screen
             name="HomeCrime"
             component={HomeCrime}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="Recommended"
+            component={Recommended}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="Book"
+            component={BookPage}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="Rating"
+            component={RatingScreen}
             options={screen_options}
           />
         </Stack.Navigator>
