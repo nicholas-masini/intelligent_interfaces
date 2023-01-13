@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image, Button, TouchableOpacity } from "react-native";
 import { Icon } from "@rneui/themed";
 
-const BookPage = ({navigation, route}) => {
+const BookPageCrime = ({navigation, route}) => {
 
     const {title, author, cover, genre, abstract} = route.params
 
@@ -38,19 +38,19 @@ const BookPage = ({navigation, route}) => {
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style={styles.button}
-                            onPress={() => navigation.navigate('Rating', {title: title})}
+                            onPress={() => navigation.navigate('RatingCrime', {title: title})}
                         >
                             <Text style={styles.button_text}>Mark as Read</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style={styles.button}
-                            onPress={() => navigation.navigate('Abstract', {title: title, abstract: abstract})}
+                            onPress={() => navigation.navigate('AbstractCrime', {title: title, abstract: abstract})}
                         >
                             <Text style={styles.button_text}>Abstract</Text>
                         </TouchableOpacity>
                     </View> 
                 </View>
-                <Footer navigation={navigation}/>
+                <Footer navigation={navigation} isCrime/>
             </SafeAreaView>
         </>
     )
@@ -68,13 +68,14 @@ const styles = StyleSheet.create({
         flex: 12,
         padding: 12,
         paddingVertical: 50,
-        backgroundColor: '#ffffff',
+        backgroundColor: 'black',
         display: "flex",
         alignItems: "center"
     },
     title: {
         fontSize: 30,
-        textAlign: "center"
+        textAlign: "center",
+        color: "white"
     },
     author: {
         fontSize: 20,
@@ -117,4 +118,4 @@ const styles = StyleSheet.create({
     }
 })  
 
-export default BookPage;
+export default BookPageCrime;

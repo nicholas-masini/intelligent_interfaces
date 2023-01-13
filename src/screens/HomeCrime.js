@@ -1,14 +1,22 @@
 // This is the same as the Home Page except with the a Crime Theme apllied to it// Here I am importing the 'Footer' component which can be found in src/components
 // The returned HTML from these components is rendered at the place of the components in the current 'Home' component
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Book from "../components/Book";
 
 // Necessary imports from React Native
-import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image } from "react-native";
+import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image, ActivityIndicator } from "react-native";
 import { Icon } from "@rneui/themed";
 
+import { homePageData, homePageNewBooks } from "../data/data";
+
+import axios from "axios";
+
 const image = require('../../assets/book.jpg') 
+
+let book_data = []
+let book_data_first_half = []
+let book_data_second_half = []
 
 const HomeCrime = ({navigation}) => {
     
@@ -16,6 +24,43 @@ const HomeCrime = ({navigation}) => {
     // What's important in our case is to set a state in the following syntax for every 'TextInput', where 
     // the value of each 'TextInput' matches a particular state variable.
     const [books, setBooks] = useState("");
+    const [search, setSearch] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const searchBooksGoogleAPI = () => {
+        setSearch(false);
+        setLoading(true);
+        setSearch(true);
+        let query_term = books.replaceAll(" ", "+");
+        axios.get('https://www.googleapis.com/books/v1/volumes?q='+query_term+'&printType=books&key=AIzaSyCtfF4iFWRe_QgLtfb-od0-va01b1izA3Y')
+            .then((response) => {
+                book_data = []
+                book_data_first_half = []
+                book_data_second_half = []
+                const books = response["data"]["items"]
+                books.forEach(book => {
+                    let volumeInfo = book["volumeInfo"];
+                    console.log(volumeInfo["imageLinks"]["smallThumbnail"])
+                    book_data.push({
+                        title: (volumeInfo["title"]) ? volumeInfo["title"] : null,
+                        author: (volumeInfo["authors"]) ? volumeInfo["authors"][0] : null,
+                        abstract: (volumeInfo["description"]) ? volumeInfo["description"] : null,
+                        genre: (volumeInfo["categories"]) ? volumeInfo["categories"][0] : null,
+                        cover: (volumeInfo["imageLinks"]) ? volumeInfo["imageLinks"]["smallThumbnail"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQutPpPRlxuO5ngkxE8YGvcWLUjE5wyNYvCA&usqp=CAU"
+                    })
+                });
+                let half_length = Math.ceil(book_data.length / 2);
+                book_data_first_half = book_data.slice(0, half_length);
+                book_data_second_half = book_data.slice(half_length, book_data.length);
+                setSearch(true);
+                setLoading(false);
+            })
+            .catch((error) => console.log(error))
+    }
+
+    useEffect(() => {
+        if(books.length == 0) setSearch(false);
+    }, [books])
 
     return (
         // NOTE: You can only return a single element from a return statement otherwise you get a compiler error, but you can have as many child elements as you want.
@@ -39,42 +84,126 @@ const HomeCrime = ({navigation}) => {
                                 <Icon
                                     name='search1'
                                     type='antdesign'
+                                    onPress={searchBooksGoogleAPI}
                                 />
                             </View>
                         </View>
-                        <Text style={styles.welcomeBack}>
-                            Welcome back, Nicholas
-                        </Text>
-                        <Text style={styles.headers}>
-                            New Crime Books
-                        </Text>
-                        <View style={{height: 290, marginBottom: 30}}>
-                            <ScrollView style={styles.books_container} horizontal>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                            </ScrollView>
-                        </View>
-                        <Text style={styles.headers}>
-                            Recommended for you
-                        </Text>
-                        <View style={{height: 290, marginBottom: 30}}>
-                            <ScrollView style={styles.books_container} horizontal>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                                <Book isCrime/>
-                            </ScrollView>
-                        </View>
+                        {
+                            (!search)
+                            ?
+                            (
+                                <>
+                                    <Text style={styles.welcomeBack}>
+                                        Welcome back, Nicholas
+                                    </Text>
+                                    <Text style={styles.headers}>
+                                        New Crime Books
+                                    </Text>
+                                    <View style={{height: 290, marginBottom: 30}}>
+                                        <ScrollView style={styles.books_container} horizontal>
+                                            {
+                                                homePageNewBooks.map((book, i) => {
+                                                    return (
+                                                        <Book 
+                                                            isCrime
+                                                            key={i+'_new_books'}
+                                                            navigation={navigation} 
+                                                            title={book.title} 
+                                                            author={book.author} 
+                                                            cover={book.cover} 
+                                                            genre={book.genre} 
+                                                            abstract={book.abstract}
+                                                        />
+                                                    )
+                                                })
+                                            }
+                                        </ScrollView>
+                                    </View>
+                                    <Text style={styles.headers}>
+                                        Recommended for you
+                                    </Text>
+                                    <View style={{height: 290, marginBottom: 30}}>
+                                        <ScrollView style={styles.books_container} horizontal>
+                                        {
+                                            homePageData.map((book, i) => {
+                                                return (
+                                                    <Book 
+                                                        isCrime
+                                                        key={i+'home_page_data'}
+                                                        navigation={navigation} 
+                                                        title={book.title} 
+                                                        author={book.author} 
+                                                        cover={book.cover} 
+                                                        genre={book.genre} 
+                                                        abstract={book.abstract}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                        </ScrollView>
+                                    </View>
+                                </>
+                            )
+                            :
+                            (loading)
+                            ?
+                            (
+                                <View style={styles.loading_container}>
+                                    <ActivityIndicator size="large"/>
+                                </View>
+                            )
+                            :
+                            (
+                                <>
+                                    <View style={styles.search_books_container}>
+                                        <View style={styles.search_books_column}>
+                                            {
+                                                book_data_first_half.map((book, i) => {
+                                                    return (
+                                                        <View style={styles.book_wrapper} key={i}>
+                                                            <Book
+                                                                isCrime
+                                                                key={i + '_book'}
+                                                                navigation={navigation} 
+                                                                title={book.title} 
+                                                                author={book.author} 
+                                                                cover={book.cover} 
+                                                                genre={book.genre} 
+                                                                abstract={book.abstract}
+                                                            />
+                                                        </View>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                        <View style={styles.search_books_column}>
+                                            {
+                                                book_data_second_half.map((book, i) => {
+                                                    return (
+                                                        <View style={styles.book_wrapper} key={i+'_second'}>
+                                                            <Book
+                                                                isCrime
+                                                                key={i + '_book_second'}
+                                                                navigation={navigation} 
+                                                                title={book.title} 
+                                                                author={book.author} 
+                                                                cover={book.cover} 
+                                                                genre={book.genre} 
+                                                                abstract={book.abstract}
+                                                            />
+                                                        </View>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                    </View>
+                                </>
+                            )
+                        }
                     </ScrollView>
                 </View>
                 {/* Rendering Footer code */}
-                <Footer navigation={navigation}/>        
+                <Footer navigation={navigation} isCrime/>        
             </SafeAreaView>
         </>
     )
@@ -126,11 +255,33 @@ const styles = StyleSheet.create({
     },
     books_container: {
         borderLeftWidth: 1,
-        borderColor: "white",
+        borderColor: "red",
         marginLeft: 18,
         paddingVertical: 20,
         paddingLeft: 15,
     },
+    search_books_container: {
+        marginTop: 30,
+        marginLeft: 25,
+        display: "flex",
+        flexDirection: "row"
+    },
+    search_books_column: {
+        flex: 1,
+        alignItems: "center",
+        display: "flex", 
+        flexDirection: "column"
+    },
+    book_wrapper: {
+        height: 280
+    },
+    loading_container: {
+        width: "100%",
+        height: 500,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }
 })
 
 // This line of code specifies that by default, the 'Home' component is exported, meaning that when importing from this file, the 'Home' component/variable 

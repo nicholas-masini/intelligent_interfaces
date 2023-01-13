@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image, Button, TouchableOpacity } from "react-native";
 import { Icon } from "@rneui/themed";
 
-const Abstract = ({navigation, route}) => {
+const AbstractCrime = ({navigation, route}) => {
 
     const { title, abstract } = route.params
 
@@ -27,7 +27,7 @@ const Abstract = ({navigation, route}) => {
                         </Text>
                     </ScrollView>
                 </View>
-                <Footer navigation={navigation}/>
+                <Footer navigation={navigation} isCrime/>
             </SafeAreaView>
         </>
     )
@@ -45,13 +45,16 @@ const styles = StyleSheet.create({
     body: {
         flex: 12,
         paddingVertical: 50,
-        backgroundColor: '#ffffff',
+        backgroundColor: 'black',
         display: "flex",
         alignItems: "center"
     },
     title: {
         fontSize: 30,
-        alignSelf: "center"
+        alignSelf: "center",
+        textAlign: "center",
+        padding: 4,
+        color: "white"
     },
     subtitle: {
         fontSize: 28,
@@ -63,7 +66,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         padding: 16,
         textAlign: "justify",
-        marginTop: 12
+        marginTop: 12,
+        color: "white"
     },
     content_container: {
         display: "flex",
@@ -71,4 +75,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Abstract;
+export default AbstractCrime;

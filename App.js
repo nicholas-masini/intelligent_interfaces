@@ -10,14 +10,29 @@ import Login from './src/screens/Login.js'
 import Recommended from './src/screens/Recommended.js';
 import BookPage from './src/screens/BookPage.js';
 import RatingScreen from './src/screens/RatingPage.js';
+import Abstract from './src/screens/Abstract.js';
+import Statistics from './src/screens/Statistics.js';
+import Account from './src/screens/Account.js';
+import BookPageCrime from './src/screens/BookPageCrime.js';
+import RatingScreenCrime from './src/screens/RatingCrime.js';
+import AbstractCrime from './src/screens/AbstractCrime.js';
+import StatisticsCrime from './src/screens/StatisticsCrime.js';
+import AccountCrime from './src/screens/AccountCrime.js';
+import RecommendedCrime from './src/screens/RecommendationsCrime.js';
 
 const Stack = createNativeStackNavigator();
+
+const home_page = {
+  title: 'SmartLibrary',
+  headerStyle: { backgroundColor: "#959CD6" },
+  headerTitleStyle: { fontSize: "25" },
+  headerBackVisible: false,
+}
 
 const screen_options = {
   title: 'SmartLibrary',
   headerStyle: { backgroundColor: "#959CD6" },
   headerTitleStyle: { fontSize: "25" },
-  headerBackVisible: false,
 }
 
 // This is the entry point of the React Native application.
@@ -43,7 +58,7 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={screen_options}
+            options={home_page}
           />
           <Stack.Screen
             name="HomeCrime"
@@ -63,6 +78,51 @@ export default function App() {
           <Stack.Screen
             name="Rating"
             component={RatingScreen}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="Abstract"
+            component={Abstract}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="Statistics"
+            component={Statistics}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="Account"
+            component={Account}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="BookCrime"
+            component={BookPageCrime}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="RatingCrime"
+            component={RatingScreenCrime}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="AbstractCrime"
+            component={AbstractCrime}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="StatisticsCrime"
+            component={StatisticsCrime}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="AccountCrime"
+            component={AccountCrime}
+            options={screen_options}
+          />
+          <Stack.Screen
+            name="RecommendedCrime"
+            component={RecommendedCrime}
             options={screen_options}
           />
         </Stack.Navigator>

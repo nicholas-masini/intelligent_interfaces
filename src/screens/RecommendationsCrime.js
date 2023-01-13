@@ -15,7 +15,7 @@ import darkSide from '../../assets/book.jpg'
 
 const abstract = "Before Alexandria Marzano-Lesnevich begins a summer job at a law firm in Louisiana, working to help defend men accused of murder, she thinks her position is clear. The child of two lawyers, she is staunchly anti-death penalty. But the moment convicted murderer Ricky Langley’s face flashes on the screen as she reviews old tapes―the moment she hears him speak of his crimes―she is overcome with the feeling of wanting him to die. Shocked by her reaction, she digs deeper and deeper into the case. Despite their vastly different circumstances, something in his story is unsettlingly, uncannily..."
 
-const Recommended = ({navigation}) => {
+const RecommendedCrime = ({navigation}) => {
 
     return (
         <>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 12,
-        backgroundColor: '#ffffff',
+        backgroundColor: 'black',
         display: "flex",
     },
     title: {
@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
     },
     description: {
         margin: 10,
-        fontSize: 20
+        fontSize: 20,
+        color: "white"
     },
     book_container: {
         marginTop: 15,
@@ -111,4 +112,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Recommended;
+export default RecommendedCrime;

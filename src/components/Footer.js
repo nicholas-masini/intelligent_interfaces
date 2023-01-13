@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Icon } from '@rneui/themed'
 
 // Below I am defining the Footer component, it is taking 'navigation' as a parameter, which can be used to change screens programmatically
-const Footer = ({navigation}) => {
+const Footer = ({navigation, isCrime}) => {
     // Like every other React Native component, below I am returning the elements, 
     // written similar to HTML, that the Footer component renders when it is imported into another file
     return (
@@ -14,7 +14,12 @@ const Footer = ({navigation}) => {
               name='book'
               type='entypo'
               style={{marginBottom: 6}}
-              onPress={() => navigation.navigate('Recommended')}
+              onPress={() => {
+                if(!isCrime)
+                  navigation.navigate('Recommended')
+                else
+                  navigation.navigate('RecommendedCrime')
+              }}
             />
             <Text>Recommendations</Text>
           </View>
@@ -23,6 +28,12 @@ const Footer = ({navigation}) => {
               name='barschart'
               type='antdesign'
               style={{marginBottom: 6}}
+              onPress={() => {
+                if(!isCrime)
+                  navigation.navigate('Statistics')
+                else
+                  navigation.navigate('StatisticsCrime')
+              }}
             />
             <Text>Statistics</Text>
           </View>
@@ -31,7 +42,12 @@ const Footer = ({navigation}) => {
               name='account-circle'
               type='materialcommunityicons'
               style={{marginBottom: 6}}
-              onPress={() => navigation.navigate('HomeCrime')}
+              onPress={() => {
+                if(!isCrime)
+                  navigation.navigate('Account')
+                else
+                  navigation.navigate('AccountCrime')
+              }}
             />
             <Text>Account</Text>
           </View>

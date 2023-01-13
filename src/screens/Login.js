@@ -12,6 +12,13 @@ const Login = ({navigation}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
+    const redirectHome = () => {
+        if(password == "test1243")
+            navigation.navigate('HomeCrime')
+        else
+            navigation.navigate('Home')
+    }
+
     return (
         <>
             {/* Here we are returning the code */}
@@ -34,7 +41,7 @@ const Login = ({navigation}) => {
                 />
                 {/* The TouchableOpacity element is exactly the same as the 'View' element except that it can allow an 'onPress' event,
                     which is a function that is executed once the element is tapped on.  */}
-                <TouchableOpacity style={[styles.button]} onPress={() => navigation.navigate('Home')}>
+                <TouchableOpacity style={[styles.button]} onPress={redirectHome}>
                     <Text style={styles.button_text}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.signup]}>

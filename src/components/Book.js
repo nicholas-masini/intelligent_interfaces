@@ -2,15 +2,20 @@ import React from "react";
 
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 
-const Book = ({navigation, isCrime, title, author, cover, genre}) => {
+const Book = ({navigation, isCrime, title, author, cover, genre, abstract}) => {
 
-    // const image = require(cover) 
+    const image = (typeof(cover) == "number") ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQutPpPRlxuO5ngkxE8YGvcWLUjE5wyNYvCA&usqp=CAU" : cover;
 
     return (
-        <TouchableOpacity style={styles.book} onPress={() => navigation.navigate('Book', { title: title, author: author, cover: cover, genre: genre})}>
+            <TouchableOpacity style={styles.book} onPress={() => {
+                if(isCrime)
+                    navigation.navigate('BookCrime', { title: title, author: author, cover: cover, genre: genre, abstract: abstract})
+                else
+                    navigation.navigate('Book', { title: title, author: author, cover: cover, genre: genre, abstract: abstract})
+            }}>
             <View style={styles.book_cover}>
                 <Image 
-                    source={cover}
+                    source={{uri: image}}
                     style={styles.image}
                 />
             </View>
