@@ -10,12 +10,7 @@ import { Icon } from "@rneui/themed";
 
 import { homePageData, homePageNewBooks } from "../data/data";
 
-const darkSide = "";
-
 import axios from "axios";
-
-// const abstract = "Before Alexandria Marzano-Lesnevich begins a summer job at a law firm in Louisiana, working to help defend men accused of murder, she thinks her position is clear. The child of two lawyers, she is staunchly anti-death penalty. But the moment convicted murderer Ricky Langley’s face flashes on the screen as she reviews old tapes―the moment she hears him speak of his crimes―she is overcome with the feeling of wanting him to die. Shocked by her reaction, she digs deeper and deeper into the case. Despite their vastly different circumstances, something in his story is unsettlingly, uncannily..."
-// const image = require('../../assets/book.jpg') 
 
 let book_data = []
 let book_data_first_half = []
@@ -23,9 +18,6 @@ let book_data_second_half = []
 
 const Home = ({navigation}) => {
 
-    // This is called a state. A state basically re-renders the component each time its value changes.
-    // What's important in our case is to set a state in the following syntax for every 'TextInput', where 
-    // the value of each 'TextInput' matches a particular state variable.
     const [books, setBooks] = useState("");
     const [search, setSearch] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -43,13 +35,12 @@ const Home = ({navigation}) => {
                 const books = response["data"]["items"]
                 books.forEach(book => {
                     let volumeInfo = book["volumeInfo"];
-                    console.log(volumeInfo["imageLinks"]["smallThumbnail"])
                     book_data.push({
-                        title: (volumeInfo["title"]) ? volumeInfo["title"] : null,
-                        author: (volumeInfo["authors"]) ? volumeInfo["authors"][0] : null,
-                        abstract: (volumeInfo["description"]) ? volumeInfo["description"] : null,
-                        genre: (volumeInfo["categories"]) ? volumeInfo["categories"][0] : null,
-                        cover: (volumeInfo["imageLinks"]) ? volumeInfo["imageLinks"]["smallThumbnail"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQutPpPRlxuO5ngkxE8YGvcWLUjE5wyNYvCA&usqp=CAU"
+                        title: (volumeInfo["title"] != undefined) ? volumeInfo["title"] : null,
+                        author: (volumeInfo["authors"] != undefined) ? volumeInfo["authors"][0] : null,
+                        abstract: (volumeInfo["description"] != undefined) ? volumeInfo["description"] : null,
+                        genre: (volumeInfo["categories"] != undefined) ? volumeInfo["categories"][0] : null,
+                        cover: (volumeInfo["imageLinks"] != undefined) ? volumeInfo["imageLinks"]["smallThumbnail"] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQutPpPRlxuO5ngkxE8YGvcWLUjE5wyNYvCA&usqp=CAU"
                     })
                 });
                 let half_length = Math.ceil(book_data.length / 2);

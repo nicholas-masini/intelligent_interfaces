@@ -8,7 +8,7 @@ import Book from "../components/Book";
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image } from "react-native";
 import { Icon } from "@rneui/themed";
 
-import { homePageData } from "../data/data";
+import { recommendedCrimeBooks, crimeAuthors } from "../data/data";
 
 // Importing images
 import darkSide from '../../assets/book.jpg'
@@ -39,9 +39,10 @@ const RecommendedCrime = ({navigation}) => {
                         <View style={{height: 315, marginBottom: 20}}>
                             <ScrollView style={styles.book_container} horizontal>
                                 {
-                                    homePageData.map((book, i) => {
+                                    recommendedCrimeBooks.map((book, i) => {
                                         return (
                                             <Book 
+                                                isCrime
                                                 key={i+'_new_books'}
                                                 navigation={navigation} 
                                                 title={book.title} 
@@ -61,12 +62,22 @@ const RecommendedCrime = ({navigation}) => {
                         </Text>
                         <View style={{height: 315, marginBottom: 20}}>
                             <ScrollView style={styles.book_container} horizontal>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                            </ScrollView>
+                                {
+                                    crimeAuthors.map((book, i) => {
+                                        return (
+                                            <Book 
+                                                isCrime
+                                                key={i+'_new_books'}
+                                                navigation={navigation} 
+                                                title={book.title} 
+                                                author={book.author} 
+                                                cover={book.cover} 
+                                                genre={book.genre} 
+                                                abstract={book.abstract}
+                                            />
+                                        )
+                                    })
+                                }</ScrollView>
                         </View>
                     </ScrollView>
                 </View>
@@ -107,7 +118,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderBottomWidth: 1,
         height: 300,
-        backgroundColor: "#E8E8E8",
+        backgroundColor: "black",
         display: "flex",
     }
 })

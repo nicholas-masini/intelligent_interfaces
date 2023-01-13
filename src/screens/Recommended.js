@@ -8,7 +8,7 @@ import Book from "../components/Book";
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image } from "react-native";
 import { Icon } from "@rneui/themed";
 
-import { homePageData } from "../data/data";
+import { recommendedBooks, recommendedAuthors } from "../data/data";
 
 // Importing images
 import darkSide from '../../assets/book.jpg'
@@ -39,7 +39,7 @@ const Recommended = ({navigation}) => {
                         <View style={{height: 315, marginBottom: 20}}>
                             <ScrollView style={styles.book_container} horizontal>
                                 {
-                                    homePageData.map((book, i) => {
+                                    recommendedBooks.map((book, i) => {
                                         return (
                                             <Book 
                                                 key={i+'_new_books'}
@@ -61,11 +61,21 @@ const Recommended = ({navigation}) => {
                         </Text>
                         <View style={{height: 315, marginBottom: 20}}>
                             <ScrollView style={styles.book_container} horizontal>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
-                                <Book navigation={navigation} title={'The Dark Side of Winter'} author={'Morgan Maxwell'} cover={darkSide} genre={'Crime'} abstract={abstract}/>
+                                {
+                                    recommendedAuthors.map((book, i) => {
+                                        return (
+                                            <Book 
+                                                key={i+'_new_books'}
+                                                navigation={navigation} 
+                                                title={book.title} 
+                                                author={book.author} 
+                                                cover={book.cover} 
+                                                genre={book.genre} 
+                                                abstract={book.abstract}
+                                            />
+                                        )
+                                    })
+                                }
                             </ScrollView>
                         </View>
                     </ScrollView>

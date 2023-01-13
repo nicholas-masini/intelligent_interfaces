@@ -8,7 +8,7 @@ import Book from "../components/Book";
 import { StyleSheet, View, SafeAreaView, TextInput, Text, ScrollView, Image, ActivityIndicator } from "react-native";
 import { Icon } from "@rneui/themed";
 
-import { homePageData, homePageNewBooks } from "../data/data";
+import { newCrimeBooks, recommendedCrimeBooks } from "../data/data";
 
 import axios from "axios";
 
@@ -40,7 +40,6 @@ const HomeCrime = ({navigation}) => {
                 const books = response["data"]["items"]
                 books.forEach(book => {
                     let volumeInfo = book["volumeInfo"];
-                    console.log(volumeInfo["imageLinks"]["smallThumbnail"])
                     book_data.push({
                         title: (volumeInfo["title"]) ? volumeInfo["title"] : null,
                         author: (volumeInfo["authors"]) ? volumeInfo["authors"][0] : null,
@@ -102,7 +101,7 @@ const HomeCrime = ({navigation}) => {
                                     <View style={{height: 290, marginBottom: 30}}>
                                         <ScrollView style={styles.books_container} horizontal>
                                             {
-                                                homePageNewBooks.map((book, i) => {
+                                                newCrimeBooks.map((book, i) => {
                                                     return (
                                                         <Book 
                                                             isCrime
@@ -125,7 +124,7 @@ const HomeCrime = ({navigation}) => {
                                     <View style={{height: 290, marginBottom: 30}}>
                                         <ScrollView style={styles.books_container} horizontal>
                                         {
-                                            homePageData.map((book, i) => {
+                                            recommendedCrimeBooks.map((book, i) => {
                                                 return (
                                                     <Book 
                                                         isCrime
